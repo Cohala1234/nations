@@ -21,5 +21,20 @@ class Continent extends Model
         //1. Linked model
         //2. Foreign key of current model into related model region
         return $this->hasMany(Region::class, 'continent_id');
-    } 
+    }
+    
+    //Relacion de continente y paises
+    //Continent: Abuelo
+    //Region: Papa
+    //Country: Nieto
+
+    public function paises()
+    {
+        //Parameters
+        //1. Nieto
+        //2. Papa
+        //3. FK del Abuelo en el Papa
+
+        return $this->hasManyThrough(Country::class, Region::class, 'continent_id', 'region_id');
+    }
 }
